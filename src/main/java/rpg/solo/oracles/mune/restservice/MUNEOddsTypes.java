@@ -14,6 +14,9 @@ public enum MUNEOddsTypes {
     }
 
     public static MUNEOddsTypes getOddsForString(String odds) {
+        if (odds == null) {
+            return NO_ODDS;
+        }
         if (odds.toUpperCase().compareTo(LIKELY.getOdds()) == 0) {
             return LIKELY;
         }
