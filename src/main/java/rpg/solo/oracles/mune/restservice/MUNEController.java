@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import rpg.solo.oracles.mune.oracle.MUNEOracle;
 import rpg.solo.oracles.mune.util.RequestParamsUtils;
 
 import java.util.ArrayList;
@@ -14,6 +15,11 @@ import java.util.Map;
 @RestController
 @RequestMapping("MUNE")
 public class MUNEController {
+    private final MUNEOracle oracle;
+
+    public MUNEController() {
+        oracle = new MUNEOracle();
+    }
     @GetMapping("/YesNoResponse")
     public ResponseEntity<MUNEResponse> yesNoResponse(@RequestParam Map<String, String> requestParams) {
         String oddsStr = requestParams.remove("odds");
@@ -28,6 +34,7 @@ public class MUNEController {
                     new MUNEErrorResponse(
                             "Invalid value for parameter 'odds'. Accepted values are NORMAL, UNLIKELY and LIKELY."));
         }
-        return ResponseEntity.ok(new MUNEYesNoResponse(odds.getOdds()));
+
+        return ResponseEntity.ok(new MUNEYesNoResponse(oracle.getSimpleYesNoAnswer(odds).getTypeStr()));
     }
 }
