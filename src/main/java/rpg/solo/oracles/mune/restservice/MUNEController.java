@@ -3,6 +3,7 @@ package rpg.solo.oracles.mune.restservice;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import rpg.solo.oracles.mune.util.RequestParamsUtils;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 @RestController
+@RequestMapping("MUNE")
 public class MUNEController {
     @GetMapping("/YesNoResponse")
     public ResponseEntity<MUNEResponse> yesNoResponse(@RequestParam Map<String, String> requestParams) {
